@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+</head>
+<body>
+    <h1>Password Strength Checker</h1>
+    <input type="password" id="password" placeholder="Enter your Password">
+    <p id="result"></p>
+</body>
+
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+        background-color: #f4f4f4;
+    }
+    input{
+        padding: 10px;
+        width: 300px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    #result{
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+
+</style>
+<script>
+    const password = document.getElementById("password");
+    const result = document.getElementById("result");
+
+    password.addEventListener("input", function(){
+        let len = password.value.length;
+
+        let hasUpper = /[A-Z]/.test(password.value);
+        let hasLower = /[a-z]/.test(password.value);
+        let hasNumber = /[0-9]/.test(password.value);
+        let hasSymbol = /[!@#$%^&*]/.test(password.value);
+
+        let score = 0;
+        if(len >=8) score++;
+        if(hasUpper) score++;
+        if(hasLower) score++;
+        if(hasNumber) score++;
+        if(hasSymbol) score++;
+
+        if(len ===0){
+            result.textContent = "";
+            result.style.color ="";
+
+        }
+        else if(score<= 2){
+            result.textContent = "Weak";
+            result.style.color = "red";
+        }
+        else if(score<= 4){
+            result.textContent = "Medium";
+            result.style.color = "orange";
+        }
+        else{
+            result.textContent = "Strong";
+            result.style.color = "green";
+        }
+    });
+</script>
+</html>
